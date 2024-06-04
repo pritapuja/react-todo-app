@@ -1,7 +1,5 @@
 import { useState } from 'react'
-import React from 'react'
 import Todos from './components/Todos'; 
-
 import './App.css'
 
 function App() {
@@ -23,8 +21,12 @@ function App() {
     },
   ])
 
+  const deleteTodo = (todoId) => {
+    const updatedTodos = todos.filter((todo) => todo.id !== todoId);
+    setTodos(updatedTodos);
+  }
 
-  // Definisikan toggleCompleted di sini
+  
   const toggleCompleted = (todoId) => {
     const updatedTodos = todos.map((todo) => {
       if (todo.id === todoId) {
@@ -39,7 +41,7 @@ function App() {
     <div style={styles.container}>
       <h1 style={styles.title}>My Todo List</h1>
       {/* Teruskan function toggleCompleted ke component Todos */}
-      <Todos todos={todos} toggleCompleted={toggleCompleted} />
+      <Todos todos={todos} toggleCompleted={toggleCompleted} deleteTodo={deleteTodo} />
     </div>
   )
 }
